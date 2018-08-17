@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <title>Welcome!</title>
+<meta name='description' content=''>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO' crossorigin='anonymous'>
+</head>
+<body>
+    <!--registration-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Belt App</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        </ul>
+        <a href='#'class="btn text-success font-weight-bold my-2 my-sm-0">Sign in</a>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-6 mr-4">
+                <h4>Registration</h4>
+                <form action='/reg_process' method='POST'>
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName">First name</label>
+                            <input name='first_name' type="text" class="form-control" id="firstName" placeholder="First Name" >
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lastName">Last name</label>
+                            <input name="last_name" type="text" class="form-control" id="lastName" placeholder="Last Name"  >
+                        </div>
+                    </div>
+        
+                    <div class="mb-3">
+                        <label for="email">Emails</label>
+                        <input name='email' type="text" class="form-control" id="email" placeholder="you@example.com">
+                    </div>
+        
+                    <label for="password">Password</label>
+                    <div class="input-group">
+                        <input name='password' type="password" class="form-control" id="password" placeholder="Password" >
+                    </div>
+        
+                    <label for="confirm_password">Confirm password</label>
+                    <div class="input-group">
+                        <input name='confirm_password' type="password" class="form-control mb-3" id="confirm_password" placeholder="Confirm password" >
+                    </div>
+                    <button class="my-2 my-sm-0 btn btn-lg btn-primary mt-4" type="submit">Register</button>
+                </form>
+                {% if messages %}
+                <ul class='messages'>
+                    {% for message in messages %}
+                        {% if message.tags == 'registration error'%}
+                    <li class='text-danger'> {{message}}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+        </div>
+
+        <div class="col-4 ml-4">
+
+             <!--Login-->
+    <form action='/login_process' method='POST'>
+        {% csrf_token %}
+    <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input name='email' type="text" id="inputEmail" class="form-control" placeholder="Email address"  autofocus>
+
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input name='password'type="password" id="inputPassword" class="form-control mb-3" placeholder="Password" >
+    
+    <button class="my-2 my-sm-0 btn btn-lg btn-primary " type="submit">Login</button>
+<!-- <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p> -->
+</form>
+{% if messages %}
+    <ul class='messages'>
+        {% for message in messages %}
+            {% if message.tags == "login error" %}
+                <li class='text-danger'>{{message}}</li>
+                {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+        </div>
+    </div>
+        
+
+</div> <!--container end tag-->
+</body>
+</html>
