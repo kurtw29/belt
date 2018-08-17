@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <title>Edit Account</title>
+<meta name='description' content=''>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO' crossorigin='anonymous'>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Edit My Account</a>
+            <div class="navbar" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                            <a class="nav-link text-primary" href="/quotes">Back <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="btn btn-success btn-sm nav-link text-white" href="/logout">Logout <span class="sr-only">(current)</span></a>
+                        </li>
+                </ul>
+            </div>
+        </nav>
+
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-6 mr-4">
+                <form action='/update' method='POST'>
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName">First name</label>
+                            <input name='first_name' type="text" class="form-control" id="firstName" value="{{first_name}}" >
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="lastName">Last name</label>
+                            <input name="last_name" type="text" class="form-control" id="lastName" value="{{last_name}}"  >
+                        </div>
+                    </div>
+    
+                    <div class="mb-3">
+                        <label for="email">Emails</label>
+                        <input name='email' type="text" class="form-control" id="email" value="{{email}}">
+                    </div>
+            
+                    <button class="my-2 my-sm-0 btn btn-lg btn-primary mt-4" type="submit">Update</button>
+                </form>
+                {% if messages %}
+                <ul class='messages'>
+                    {% for message in messages %}
+                    <li class='text-danger'> {{message}}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

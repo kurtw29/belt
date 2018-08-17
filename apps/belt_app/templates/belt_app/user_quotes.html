@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <title>User Quotes</title>
+<meta name='description' content=''>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO' crossorigin='anonymous'>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"></a>
+        <div class=" navbar" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link text-primary" href="/quotes">Back <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class=" btn btn-success btn-sm nav-link text-white" href="/logout">Logout <span class="sr-only">(current)</span></a>
+            </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container col-6">
+        <h5>{{first_name}} {{last_name}}'s Quotes</h5>
+        {% for quote in quote_content%}
+        <div class="container pt-3 pd-3 border border-secondary">
+            {{quote.author}}: "{{quote.quote}}"
+        </div>
+        {% endfor %}
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <title>Quote Dashboard</title>
+<meta name='description' content=''>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO' crossorigin='anonymous'>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Welcome <span class='font-weight-bold'>{{user.first_name}} {{user.last_name}}!</span></a>
+            <div class="navbar" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto right">
+                <li class="nav-item active">
+                    <a class="nav-link text-primary right" href="/myaccount/{{user.id}}">Edit My Account <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="btn btn-success btn-sm nav-link text-white" href="/logout">Logout <span class="sr-only">(current)</span></a>
+                </li>
+                </ul>
+            </div>
+        </nav>
+<div class="row">
+    <div class="col-4">
+        <h5>Quotes</h5>
+        {% for quote in quotes %}
+        <ul class='list-unstyled'>
+            <li class="container border border-secondary">
+                <p>{{quote.author}}: "{{quote.quote}}"</p>
+                <br>
+                <p>Posted by <a href='/user/{{quote.poster.id}}'>{{quote.poster.first_name}} {{quote.poster.last_name}}</a>
+                <p>  {{quote.liked_users.count}} people like this <a href='/like/{{quote.id}}' class='btn btn-sm btn-success'>Like!</a></p>
+                {% if quote.poster.id == request.session.id %}<a href='/delete/{{quote.id}}'>Delete</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+
+    <div class="col-4">
+        <h5>Add a Quote!</h5>
+        <form action='/add_quote' method='POST'>
+            {% csrf_token %}
+            <label for='author'>Author:</label>
+            <input name='author_name' type='text'>
+            <br>
+            <label style='vertical-align: top'>Quote:</label>
+            <textarea name='quote_content' rows='3' cols='40'></textarea>
+            <button class="my-2 my-sm-0 btn btn-lg btn-primary" type='submit'>Submit</button>
+        </form>
+        {% if messages %}
+                <ul class='messages'>
+                    {% for message in messages %}
+                    <li class='text-danger'> {{message}}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+    </div>
+</div>
+
+</body>
+</html>
